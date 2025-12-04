@@ -1,5 +1,5 @@
-local TaskLib = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/panipurienjoyer-cell/Utility/refs/heads/main/Task.lua'))(); 
-local Signal = loadstring(game:HttpGet('https://raw.githubusercontent.com/panipurienjoyer-cell/Utility/refs/heads/main/Signal.lua'))();
+local TaskLib = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/AccountCelestial/Utility/refs/heads/main/Task.lua'))(); 
+local Signal = loadstring(game:HttpGet('https://raw.githubusercontent.com/AccountCelestial/Utility/refs/heads/main/Signal.lua'))();
 
 -- Services
 local runService = game:GetService('RunService');
