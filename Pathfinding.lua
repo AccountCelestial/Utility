@@ -248,7 +248,7 @@ function Path:Stop()
 	end
 	if self._status == Path.StatusType.Idle then
 		output(function(m)
-			warn(debug.traceback(m))
+			-- warn(debug.traceback(m))
 		end, 'Attempt to run Path:Stop() in idle state')
 		return
 	end
