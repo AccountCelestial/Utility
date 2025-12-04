@@ -3,10 +3,8 @@ local vim = getvirtualinputmanager and getvirtualinputmanager();
 
 if not vim then
     pcall(function()
-        local v = game:GetService('VirtualInputManager');
-        if v then
-            vim = v;
-        end;
+        local v = Instance.new('VirtualInputManager') or game:GetService('VirtualInputManager');
+        vim = v;
     end);
 end;
 
