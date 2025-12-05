@@ -20,15 +20,14 @@ function NotificationFunctions:Load()
     NotificationList = NotificationLibrary.list;
     NotificationLibrary.Name = generateString();
     NotificationLibrary.Parent = CoreGui;
-    NotificationName = NotificationLibrary.Name;
     ProtectGui(NotificationLibrary);
 end;
 
 function NotificationFunctions:SendNotification(Mode, Text, Duration)
-    if not CoreGui:FindFirstChild(NotificationName) then
+    if not CoreGui:FindFirstChild(NotificationLibrary.Name) then
         NotificationFunctions:Load();
     else
-        NotificationLibrary = CoreGui:FindFirstChild(NotificationName);
+        NotificationLibrary = CoreGui:FindFirstChild(NotificationLibrary.Name);
         NotificationTemplates = NotificationLibrary.Templates;
         NotificationList = NotificationLibrary.list;
     end
