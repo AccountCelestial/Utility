@@ -4,7 +4,7 @@ local cloneref = cloneref or function(o) return o end;
 local TweenService = cloneref(game:GetService('TweenService'));
 local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end);
 local CoreGui = gethui or (function() return game:GetService('CoreGui') end);
-local NotificationLibrary, NotificationTemplates, NotificationList;
+local NotificationLibrary, NotificationTemplates, NotificationList, NotificationName;
 
 local function generateString()
     local chars = {};
@@ -20,14 +20,15 @@ function NotificationFunctions:Load()
     NotificationList = NotificationLibrary.list;
     NotificationLibrary.Name = generateString();
     NotificationLibrary.Parent = CoreGui;
+    NotificationName = NotificationLibrary.Name;
     ProtectGui(NotificationLibrary);
 end;
 
 function NotificationFunctions:SendNotification(Mode, Text, Duration)
-    if not CoreGui:FindFirstChild(generateString()) then
+    if not CoreGui:FindFirstChild(NotificationName) then
         NotificationFunctions:Load();
     else
-        NotificationLibrary = CoreGui:FindFirstChild(generateString());
+        NotificationLibrary = CoreGui:FindFirstChild(NotificationName);
         NotificationTemplates = NotificationLibrary.Templates;
         NotificationList = NotificationLibrary.list;
     end
