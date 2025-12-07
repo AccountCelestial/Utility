@@ -5,7 +5,7 @@ local ServiceLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/Ac
 local VIM, GuiService, Players = ServiceLib:Get('VirtualInputManager', 'GuiService', 'Players');
 local LocalPlayer = Players.LocalPlayer;
 
-function SimulateLib:MosueClick(target, eventName, mode)
+function SimulateLib:Click(target, eventName, mode)
     if mode == 'firesignal' and firesignal and target and target[eventName] then
         local ok, err = pcall(function() firesignal(target[eventName]) end);
         if not ok then warn('firesignal error: ', err); end;
@@ -37,7 +37,7 @@ function SimulateLib:MosueClick(target, eventName, mode)
     end;
 end;
 
-function SimulateLib:KeyPress(key, time)
+function SimulateLib:SendKeyEvent(key, time)
     local ok, err = pcall(function()
         VIM:SendKeyEvent(true, Enum.KeyCode[key], false, game);
         task.wait(time or nil);
