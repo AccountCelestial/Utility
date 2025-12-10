@@ -51,7 +51,7 @@ function SimulateLib:SendMouseEvent(state)
     if not ok then warn('VIM SendMouseEvent error: ', err) end
 end
 
-function SimulateLib:Fire(target, eventName, mode)
+function SimulateLib:Fire(target, mode)
     if mode == 'fireproximityprompt' and fireproximityprompt and target then
         local ok, err = pcall(function()
             fireproximityprompt(target)
