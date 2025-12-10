@@ -46,7 +46,7 @@ end
 
 function SimulateLib:SendMouseEvent(state)
     local ok, err = pcall(function()
-        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, state, game, 0)
+        VIM:SendMouseButtonEvent(0, 0, 0, state, game, 0)
     end)
     if not ok then warn('VIM SendMouseEvent error: ', err) end
 end
