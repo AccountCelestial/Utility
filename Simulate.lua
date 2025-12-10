@@ -70,7 +70,7 @@ end
 
 local afkConnect = nil
 
-function SimulateLib:Player(state, mode)
+function SimulateLib:PlayerConnect(state, mode)
     if mode == 'afk' then
         if state then
             afkConnect = LocalPlayer.Idled:Connect(function()
