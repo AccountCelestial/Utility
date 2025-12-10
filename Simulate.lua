@@ -5,7 +5,7 @@ local ServiceLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/Ac
 local VIM, GuiService, Players, VirtualUser, CurrentCamera = ServiceLib:Get('VirtualInputManager', 'GuiService', 'Players', 'VirtualUser')
 local LocalPlayer = Players.LocalPlayer
 
-function SimulateLib:Click(target, eventName, mode)
+function SimulateLib:ClickButton(target, eventName, mode)
     if mode == 'firesignal' and firesignal and target and target[eventName] then
         local ok, err = pcall(function() firesignal(target[eventName]) end)
         if not ok then warn('firesignal error: ', err) end
@@ -37,13 +37,18 @@ function SimulateLib:Click(target, eventName, mode)
     end
 end
 
-function SimulateLib:SendKeyEvent(key, time)
+function SimulateLib:SendKeyEvent(state, key)
     local ok, err = pcall(function()
-        VIM:SendKeyEvent(true, Enum.KeyCode[key], false, game)
-        task.wait(time or nil)
-        VIM:SendKeyEvent(false, Enum.KeyCode[key], false, game)
+        VIM:SendKeyEvent(state, Enum.KeyCode[key], false, game)
     end)
-    if not ok then warn('VIM KeyPress error: ', err) end
+    if not ok then warn('VIM SendKeyEvent error: ', err) end
+end
+
+function SimulateLib:SendMouseEvent(state)
+    local ok, err = pcall(function()
+        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, state, game, 0)
+    end)
+    if not ok then warn('VIM SendMouseEvent error: ', err) end
 end
 
 function SimulateLib:Fire(target, eventName, mode)
