@@ -2,8 +2,10 @@ local SimulateLib = {};
 
 local ServiceLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/AccountCelestial/Utility/refs/heads/main/Services.lua'))();
 
-local VIM, GuiService, Players = ServiceLib:Get('VirtualInputManager', 'GuiService', 'Players');
+local VIM, GuiService, Players, VirtualUser, CurrentCamera = ServiceLib:Get('VirtualInputManager', 'GuiService', 'Players', 'VirtualUser');
 local LocalPlayer = Players.LocalPlayer;
+
+getgenv().AFK = false;
 
 function SimulateLib:Click(target, eventName, mode)
     if mode == 'firesignal' and firesignal and target and target[eventName] then
@@ -67,5 +69,19 @@ function SimulateLib:Fire(target, eventName, mode)
         if not ok then warn('firetouchinterest error: ', err); end;
     end;
 end;
+
+function SimulateLib:Player(state, mode)
+    if mode == 'AFK' then
+        getgenv().AFK = state;
+    end;
+end;
+
+LocalPlayer.Idled:Connect(function()
+    if getgenv().AFK then
+        VirtualUser:Button2Down(Vector2.new(0,0), CurrentCamera.CFrame);
+        task.wait(1);
+        VirtualUser:Button2Up(Vector2.new(0,0), CurrentCamera.CFrame);
+    end;
+end);
 
 return SimulateLib;
